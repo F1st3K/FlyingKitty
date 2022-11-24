@@ -1,0 +1,17 @@
+﻿<Window x:Class="FlyingKitty.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlyingKitty"
+        mc:Ignorable="d"
+        Width="560" Height="720" 
+        MinWidth="560" MaxWidth="560"
+        MinHeight="720" MaxHeight="720"
+        ResizeMode="CanMinimize"
+        Title="Flying Kitty"
+        >
+    <Grid Width="560" Height="700">
+        
+    </Grid>
+</Window>
