@@ -9,9 +9,12 @@
         MinWidth="560" MaxWidth="560"
         MinHeight="720" MaxHeight="720"
         ResizeMode="CanMinimize"
-        Title="Flying Kitty"
+        WindowStartupLocation="CenterScreen"
+        Title="Flying Kitty" Loaded="Window_Loaded"
         >
-    <Grid Width="560" Height="700">
-        
+    <Grid>
+        <Canvas Width="560" Height="700"
+            Name="MainCanvas"
+            Background="LightSkyBlue"/>
     </Grid>
 </Window>
