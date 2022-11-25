@@ -31,5 +31,13 @@ namespace FlyingKitty
             posX = x;
             poxY = y;
         }
+        public void FlyUp(int value)
+        {
+            SetPosition(posX, poxY-value);
+        }
+        public void FlyDown(int value)
+        {
+            SetPosition(posX, poxY+value);
+        }
     }
 }
