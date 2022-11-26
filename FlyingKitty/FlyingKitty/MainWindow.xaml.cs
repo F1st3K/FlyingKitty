@@ -75,5 +75,18 @@ namespace FlyingKitty
         {
             
         }
+
+        private void KeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter ||
+                e.Key == Key.Space ||
+                e.Key == Key.Down)
+            {
+                if (e.IsUp)
+                    _player.DirectionY = -1;
+                if (e.IsDown)
+                    _player.DirectionY = 1;
+            }
+        }
     }
 }
