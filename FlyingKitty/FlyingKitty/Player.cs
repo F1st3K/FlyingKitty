@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace FlyingKitty
 {
@@ -17,6 +18,8 @@ namespace FlyingKitty
 
         public int DirectionY = -1;
         public int DirectionX = 1;
+        private DispatcherTimer PushDownTimer = new DispatcherTimer();
+        private double PushDownMSTime = 500;
 
         public Player(int mass, int width, int hight, ImageSource sourse)
         {
@@ -29,8 +32,20 @@ namespace FlyingKitty
             _image.Width = Width;
             _image.Height = Height;
             Children.Add(_image);
+
+            PushDownTimer.Interval = TimeSpan.FromMilliseconds(PushDownMSTime);
+            PushDownTimer.Tick += (sender, ards) => { DirectionY = -1; };
         }
         public void Update()
+        {
+            if (DirectionY == 1)
+                PushDownTimer.Start();
+            else PushDownTimer.Stop();
+
+            Fly();
+                       
+        }
+        public void Fly()
         {
             _posY += MainWindow.Gtick * _mass * DirectionY;
         }

@@ -9,6 +9,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -27,6 +29,8 @@ namespace FlyingKitty
         private bool IsGameOver = false;
         private DispatcherTimer gameTimer = new DispatcherTimer();
         static private double tickRate = 128;
+        private int tick = 0;
+        private int KeyTime = 0;
         private DispatcherTimer renderTimer = new DispatcherTimer();
         static private double FPS = 120;
 
@@ -39,7 +43,7 @@ namespace FlyingKitty
             InitializeComponent();
             //load model player
             Uri uriImage = new Uri("../../images/player.png", UriKind.Relative);
-            _player = new Player(100, 75, 75, new BitmapImage(uriImage));
+            _player = new Player(50, 75, 75, new BitmapImage(uriImage));
             MainCanvas.Children.Add(_player);
             _player.SetPosition(75, 400);
             _player.RenderPosition();
@@ -49,9 +53,11 @@ namespace FlyingKitty
         }
         private void Start()
         {
+            //create game ticrate timer   
             gameTimer.Interval = TimeSpan.FromSeconds(1/tickRate);
             gameTimer.Tick += new EventHandler(Update);
             gameTimer.Start();
+            //create render FPS timer
             renderTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
             renderTimer.Tick += new EventHandler(Render);
             renderTimer.Start();
@@ -65,6 +71,7 @@ namespace FlyingKitty
         private void Update(object sender, EventArgs e)
         {
             _player.Update();
+            tick++;
         }
 
         private void End()
@@ -76,17 +83,21 @@ namespace FlyingKitty
             
         }
 
-        private void KeyEvent(object sender, KeyEventArgs e)
+
+        private void KeyDownEvent(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter ||
                 e.Key == Key.Space ||
                 e.Key == Key.Down)
             {
-                if (e.IsUp)
-                    _player.DirectionY = -1;
-                if (e.IsDown)
+                if (_player.DirectionY == -1)
                     _player.DirectionY = 1;
             }
+        }
+
+        private void KeyUpEvent(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }
