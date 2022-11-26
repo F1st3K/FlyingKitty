@@ -11,11 +11,18 @@ namespace FlyingKitty
     internal class Player : Canvas
     {
         private Image _image;
-        private int posX, poxY;
-        public Player(int width, int hight, ImageSource sourse)
+        private double _posX;
+        private double _posY;
+        public double _mass;
+
+        public int DirectionY = -1;
+        public int DirectionX = 1;
+
+        public Player(int mass, int width, int hight, ImageSource sourse)
         {
             Width = width;
             Height = hight;
+            _mass = mass;
             //load image
             _image = new Image();
             _image.Source = sourse;
@@ -23,20 +30,20 @@ namespace FlyingKitty
             _image.Height = Height;
             Children.Add(_image);
         }
-        public void SetPosition(int x, int y)
+        public void Update()
         {
-            Canvas.SetLeft(this, x);
-            Canvas.SetTop(this, y);
-            posX = x;
-            poxY = y;
+            _posY += MainWindow.Gtick * _mass * DirectionY;
         }
-        public void FlyUp(int value)
+        public void RenderPosition()
         {
-            SetPosition(posX, poxY-value);
+            Canvas.SetLeft(this, _posX);
+            Canvas.SetTop(this, _posY);
         }
-        public void FlyDown(int value)
+        public void SetPosition(double x, double y)
         {
-            SetPosition(posX, poxY+value);
+            _posX = x;
+            _posY = y;
         }
+        
     }
 }

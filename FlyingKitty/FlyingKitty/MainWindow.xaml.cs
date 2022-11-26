@@ -26,30 +26,45 @@ namespace FlyingKitty
 
         private bool IsGameOver = false;
         private DispatcherTimer gameTimer = new DispatcherTimer();
-        private double GameSpeed = 60;
+        static private double tickRate = 128;
+        private DispatcherTimer renderTimer = new DispatcherTimer();
+        static private double FPS = 120;
+
+        static public double g = 9.8;
+        static public double Gtick = g / tickRate;
+
 
         public MainWindow()
         {
             InitializeComponent();
             //load model player
             Uri uriImage = new Uri("../../images/player.png", UriKind.Relative);
-            _player = new Player(75, 75, new BitmapImage(uriImage));
+            _player = new Player(100, 75, 75, new BitmapImage(uriImage));
             MainCanvas.Children.Add(_player);
-            _player.SetPosition(75, 300);
+            _player.SetPosition(75, 400);
+            _player.RenderPosition();
             //initialize obs controler and generate map
             _obsControler = new ObstacleControler();
             Start();
         }
         private void Start()
         {
-            gameTimer.Interval = TimeSpan.FromSeconds(1/GameSpeed);
+            gameTimer.Interval = TimeSpan.FromSeconds(1/tickRate);
             gameTimer.Tick += new EventHandler(Update);
             gameTimer.Start();
+            renderTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
+            renderTimer.Tick += new EventHandler(Render);
+            renderTimer.Start();
+        }
+
+        private void Render(object sender, EventArgs e)
+        {
+            _player.RenderPosition();
         }
 
         private void Update(object sender, EventArgs e)
         {
-            _player.FlyUp(3);
+            _player.Update();
         }
 
         private void End()
