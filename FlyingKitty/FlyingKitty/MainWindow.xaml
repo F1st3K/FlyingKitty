@@ -11,7 +11,7 @@
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Title="Flying Kitty" Loaded="Window_Loaded" 
-        KeyDown="KeyDownEvent" KeyUp="KeyUpEvent"
+        KeyDown="KeyDownEvent"
         >
     <Grid>
         <Canvas Width="560" Height="700"

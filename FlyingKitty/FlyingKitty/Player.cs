@@ -14,40 +14,55 @@ namespace FlyingKitty
         private Image _image;
         private double _posX;
         private double _posY;
-        public double _mass;
+        private double _mass;
+        private DispatcherTimer PushDownTimer;
+        private double PushDownMSTime;
 
-        public int DirectionY = -1;
-        public int DirectionX = 1;
-        private DispatcherTimer PushDownTimer = new DispatcherTimer();
-        private double PushDownMSTime = 500;
+        public int DirectionY { get; private set; }
+        public int DirectionX { get; private set; }
+        public bool IsPushDown { private get; set; }
 
         public Player(int mass, int width, int hight, ImageSource sourse)
         {
+            //constructor
             Width = width;
             Height = hight;
             _mass = mass;
+            PushDownTimer = new DispatcherTimer();
+            PushDownMSTime = _mass * 4;
+            DirectionY = -1;
+            DirectionX = 1;
+            IsPushDown = false;
             //load image
             _image = new Image();
             _image.Source = sourse;
             _image.Width = Width;
             _image.Height = Height;
             Children.Add(_image);
-
+            //change time push down 
             PushDownTimer.Interval = TimeSpan.FromMilliseconds(PushDownMSTime);
-            PushDownTimer.Tick += (sender, ards) => { DirectionY = -1; };
+            PushDownTimer.Tick += (sender, ards) => { IsPushDown = false; };
         }
         public void Update()
         {
-            if (DirectionY == 1)
-                PushDownTimer.Start();
-            else PushDownTimer.Stop();
-
+            PushDown();
             Fly();
-                       
         }
+
+        private void PushDown()
+        {
+            if (IsPushDown)
+            {
+                DirectionY = 1;
+                PushDownTimer.Start();
+            }
+            else PushDownTimer.Stop();
+        }
+
         public void Fly()
         {
             _posY += MainWindow.Gtick * _mass * DirectionY;
+            DirectionY = -1;
         }
         public void RenderPosition()
         {
