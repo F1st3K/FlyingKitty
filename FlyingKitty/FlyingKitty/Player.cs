@@ -31,7 +31,7 @@ namespace FlyingKitty
             PushDownTimer = new DispatcherTimer();
             PushDownMSTime = _mass * 4;
             DirectionY = -1;
-            DirectionX = 1;
+            DirectionX = 0;
             IsPushDown = false;
             //load image
             _image = new Image();
@@ -47,6 +47,7 @@ namespace FlyingKitty
         {
             PushDown();
             Fly();
+            DirectionY = -1;
         }
 
         private void PushDown()
@@ -59,10 +60,13 @@ namespace FlyingKitty
             else PushDownTimer.Stop();
         }
 
-        public void Fly()
+        private void Fly()
         {
-            _posY += MainWindow.Gtick * _mass * DirectionY;
-            DirectionY = -1;
+            _posY += MainWindow.g / MainWindow.tickRate * _mass * DirectionY;
+        }
+        private void Move()
+        {
+            _posX += MainWindow.g / MainWindow.tickRate * _mass * DirectionX;
         }
         public void RenderPosition()
         {

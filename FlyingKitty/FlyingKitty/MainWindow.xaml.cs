@@ -28,14 +28,13 @@ namespace FlyingKitty
 
         private bool IsGameOver = false;
         private DispatcherTimer gameTimer = new DispatcherTimer();
-        static private double tickRate = 128;
+        static public double tickRate = 128;
         private int tick = 0;
         private int KeyTime = 0;
         private DispatcherTimer renderTimer = new DispatcherTimer();
         static private double FPS = 120;
 
         static public double g = 9.8;
-        static public double Gtick = g / tickRate;
 
 
         public MainWindow()
