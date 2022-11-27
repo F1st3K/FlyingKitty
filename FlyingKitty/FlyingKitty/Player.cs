@@ -14,6 +14,7 @@ namespace FlyingKitty
         private Image _image;
         private DispatcherTimer PushDownTimer;
         private double PushDownMSTime;
+
         public bool IsPushDown { private get; set; }
 
         public Player(double speedY, double timeJump, int width, int height, ImageSource sourse)

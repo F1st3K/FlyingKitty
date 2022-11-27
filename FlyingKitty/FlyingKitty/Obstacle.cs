@@ -4,10 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace FlyingKitty
 {
-    internal class Obstacle
+    internal class Obstacle : Sprite
     {
+        private Image _image;
+        public Obstacle(double speedX, double speedY, int width, int height, ImageSource sourse)
+        {
+            //constructor
+            Width = width;
+            Height = height;
+            _speedX = speedX;
+            _speedY = speedY;
+            DirectionY = 0;
+            DirectionX = 0;
+            Hitbox = new System.Windows.Rect(Width * 0.025, Height * 0.025, Width * 0.95, Height * 0.95);
+            //load image
+            _image = new Image();
+            _image.Source = sourse;
+            _image.Width = Width;
+            _image.Height = Height;
+            Children.Add(_image);
+        }
     }
 }
