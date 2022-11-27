@@ -13,22 +13,30 @@ namespace FlyingKitty
         static public Obstacle Ground { get; private set; }
         static public Obstacle Sky    { get; private set; }
         static public double GameSpeed;
-        static public void CreateGround(int width, int height, string pathImage)
+        static public void SetGround(int width, int height, string pathImage)
         {
             Uri uri = new Uri(pathImage, UriKind.Relative);
             Ground = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
-        static public void CreateSky(int width, int height, string pathImage)
+        static public void SetSky(int width, int height, string pathImage)
         {
             Uri uri = new Uri(pathImage, UriKind.Relative);
             Sky = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
-        static public void CreateMap(int count, int width, int height, string pathImage)
+        static public void SetMap(int count, int width, int height, string pathImage)
         {
             Uri uri = new Uri(pathImage, UriKind.Relative);
             Map = new Obstacle[count];
             for (int i = 0; i < count; i++)
                 Map[i] = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
+        }
+        static public void CreateMap()
+        {
+            Sky.SetPosition(0, -50);
+            Sky.RenderPosition();
+            Map[0].SetPosition(300, 500);
+            Map[1].SetPosition(300, -500);
+            Ground.SetPosition(0, 650);
         }
         static public void Update()
         {

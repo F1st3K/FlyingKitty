@@ -33,6 +33,8 @@ namespace FlyingKitty
             renderTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
             renderTimer.Tick += new EventHandler(Render);
             renderTimer.Start();
+            //create map
+            ObstacleControler.CreateMap();
         }
         private void Update(object sender, EventArgs e)
         {
