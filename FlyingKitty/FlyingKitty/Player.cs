@@ -9,27 +9,21 @@ using System.Windows.Threading;
 
 namespace FlyingKitty
 {
-    internal class Player : Canvas
+    internal class Player : Sprite
     {
         private Image _image;
-        private double _posX;
-        private double _posY;
-        private double _mass;
         private DispatcherTimer PushDownTimer;
         private double PushDownMSTime;
-
-        public int DirectionY { get; private set; }
-        public int DirectionX { get; private set; }
         public bool IsPushDown { private get; set; }
 
-        public Player(int mass, int width, int hight, ImageSource sourse)
+        public Player(double speedY, double timeJump, int width, int hight, ImageSource sourse)
         {
             //constructor
             Width = width;
             Height = hight;
-            _mass = mass;
+            _speedY = speedY;
             PushDownTimer = new DispatcherTimer();
-            PushDownMSTime = _mass * 4;
+            PushDownMSTime = timeJump;
             DirectionY = -1;
             DirectionX = 0;
             IsPushDown = false;
@@ -43,13 +37,12 @@ namespace FlyingKitty
             PushDownTimer.Interval = TimeSpan.FromMilliseconds(PushDownMSTime);
             PushDownTimer.Tick += (sender, ards) => { IsPushDown = false; };
         }
-        public void Update()
+        public override void Update()
         {
             PushDown();
             Fly();
             DirectionY = -1;
         }
-
         private void PushDown()
         {
             if (IsPushDown)
@@ -58,26 +51,6 @@ namespace FlyingKitty
                 PushDownTimer.Start();
             }
             else PushDownTimer.Stop();
-        }
-
-        private void Fly()
-        {
-            _posY += MainWindow.g / MainWindow.tickRate * _mass * DirectionY;
-        }
-        private void Move()
-        {
-            _posX += MainWindow.g / MainWindow.tickRate * _mass * DirectionX;
-        }
-        public void RenderPosition()
-        {
-            Canvas.SetLeft(this, _posX);
-            Canvas.SetTop(this, _posY);
-        }
-        public void SetPosition(double x, double y)
-        {
-            _posX = x;
-            _posY = y;
-        }
-        
+        }     
     }
 }
