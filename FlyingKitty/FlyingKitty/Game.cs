@@ -18,7 +18,6 @@ namespace FlyingKitty
         private DispatcherTimer gameTimer = new DispatcherTimer();
         private DispatcherTimer renderTimer = new DispatcherTimer();
         private Player _player;
-        private ObstacleControler _obsControler;
         public Game(Player player)
         {
             _player = player;

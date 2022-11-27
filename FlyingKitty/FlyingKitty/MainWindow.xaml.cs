@@ -24,20 +24,37 @@ namespace FlyingKitty
     public partial class MainWindow : Window
     {
         private Player player;
-        private ObstacleControler _obsControler;
         private Game game;
 
         public MainWindow()
         {
             InitializeComponent();
+
             //load model player
             Uri uriImage = new Uri("../../images/player.png", UriKind.Relative);
             player = new Player(90*Game.G/Game.TICKRATE, 360, 75, 75, new BitmapImage(uriImage));
             MainCanvas.Children.Add(player);
             player.SetPosition(75, 400);
             player.RenderPosition();
-            //initialize obs controler and generate map
-            _obsControler = new ObstacleControler();
+
+            //Create obstacle
+            ObstacleControler.CreateGround((int)Width, 50, "../../images/graund.jpg");
+            ObstacleControler.CreateSky((int)Width, 10, "../../images/sky.jpg");
+            ObstacleControler.CreateMap(50, 75, (int)Height, "../../images/obstacle.png");
+
+            //add obstacle on MainCanvas
+            MainCanvas.Children.Add(ObstacleControler.Ground);
+            Canvas.SetTop(ObstacleControler.Ground, Height-75);
+            MainCanvas.Children.Add(ObstacleControler.Sky);
+            Canvas.SetTop(ObstacleControler.Sky, -50);
+            for (int i = 0; i < ObstacleControler.Map.Length; i++)
+                MainCanvas.Children.Add(ObstacleControler.Map[i]);
+
+            Canvas.SetBottom(ObstacleControler.Map[0], 300);
+            Canvas.SetLeft(ObstacleControler.Map[0], 300);
+            Canvas.SetTop(ObstacleControler.Map[1], 500);
+            Canvas.SetLeft(ObstacleControler.Map[1], 300);
+
             //start game
             game = new Game(player);
             game.Start();

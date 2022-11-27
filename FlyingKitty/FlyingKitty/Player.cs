@@ -53,6 +53,6 @@ namespace FlyingKitty
                 PushDownTimer.Start();
             }
             else PushDownTimer.Stop();
-        }     
+        }
     }
 }
