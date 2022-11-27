@@ -16,17 +16,18 @@ namespace FlyingKitty
         private double PushDownMSTime;
         public bool IsPushDown { private get; set; }
 
-        public Player(double speedY, double timeJump, int width, int hight, ImageSource sourse)
+        public Player(double speedY, double timeJump, int width, int height, ImageSource sourse)
         {
             //constructor
             Width = width;
-            Height = hight;
+            Height = height;
             _speedY = speedY;
             PushDownTimer = new DispatcherTimer();
             PushDownMSTime = timeJump;
-            DirectionY = -1;
+            DirectionY = 0;
             DirectionX = 0;
             IsPushDown = false;
+            Hitbox = new System.Windows.Rect(Width*0.1, Height*0.1, Width*0.8, Height*0.8);
             //load image
             _image = new Image();
             _image.Source = sourse;
