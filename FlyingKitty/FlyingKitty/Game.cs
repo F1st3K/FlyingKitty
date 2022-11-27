@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,11 +37,13 @@ namespace FlyingKitty
         private void Update(object sender, EventArgs e)
         {
             _player.Update();
+            ObstacleControler.Update();
             Tick++;
         }
         private void Render(object sender, EventArgs e)
         {
             _player.RenderPosition();
+            ObstacleControler.Render();
         }
         private void End()
         {

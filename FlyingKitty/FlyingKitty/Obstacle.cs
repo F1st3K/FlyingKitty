@@ -19,7 +19,7 @@ namespace FlyingKitty
             _speedX = speedX;
             _speedY = speedY;
             DirectionY = 0;
-            DirectionX = 0;
+            DirectionX = -1;
             Hitbox = new System.Windows.Rect(Width * 0.025, Height * 0.025, Width * 0.95, Height * 0.95);
             //load image
             _image = new Image();
@@ -27,6 +27,10 @@ namespace FlyingKitty
             _image.Width = Width;
             _image.Height = Height;
             Children.Add(_image);
+        }
+        public override void Update()
+        {
+            Move();
         }
     }
 }
