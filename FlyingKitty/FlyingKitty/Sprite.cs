@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace FlyingKitty
@@ -35,6 +30,7 @@ namespace FlyingKitty
             SetLeft(this, _posX);
             SetTop(this, _posY);
         }
+
         private protected virtual void UpdateHitbox()
         {
             Hitbox = new Rect(_posX, _posY, Width, Height);

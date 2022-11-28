@@ -10,7 +10,7 @@
         MinHeight="720" MaxHeight="720"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
-        Title="Flying Kitty" Loaded="Window_Loaded" 
+        Title="Flying Kitty" 
         KeyDown="KeyDownEvent"
         >
     <Grid>

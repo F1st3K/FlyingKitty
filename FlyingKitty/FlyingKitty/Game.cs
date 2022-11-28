@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
@@ -15,12 +9,13 @@ namespace FlyingKitty
         public const double FPS = 120;
         public const double G = 9.8;
         public const double TICKRATE = 128;
+
+        private DispatcherTimer gameTimer = new DispatcherTimer();
+        private DispatcherTimer frameTimer = new DispatcherTimer();
+
         static public int Tick { get; private set; } = 0;
         public Player _player { get; private set; }
 
-        private bool IsGameOver = false;
-        private DispatcherTimer gameTimer = new DispatcherTimer();
-        private DispatcherTimer frameTimer = new DispatcherTimer();
         public void Start()
         {   
             //create map
@@ -45,6 +40,7 @@ namespace FlyingKitty
             if (_player.DirectionY == -1)
                 _player.IsPushDown = true;
         }
+
         private void Update(object sender, EventArgs e)
         {
             //update objects
