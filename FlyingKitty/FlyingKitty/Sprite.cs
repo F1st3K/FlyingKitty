@@ -32,8 +32,8 @@ namespace FlyingKitty
         }
         public void RenderPosition()
         {
-            Canvas.SetLeft(this, _posX);
-            Canvas.SetTop(this, _posY);
+            SetLeft(this, _posX);
+            SetTop(this, _posY);
         }
         private protected virtual void UpdateHitbox()
         {

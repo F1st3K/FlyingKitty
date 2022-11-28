@@ -36,7 +36,7 @@ namespace FlyingKitty
         }
         static public void CreateMap()
         {
-            Sky.SetPosition(0, -5);
+            Sky.SetPosition(0, -50);
             Sky.RenderPosition();
             Map[0].SetPosition(300, 400);
             Map[1].SetPosition(300, -500);

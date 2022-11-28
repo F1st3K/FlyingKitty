@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace FlyingKitty
@@ -15,18 +16,14 @@ namespace FlyingKitty
         public const double G = 9.8;
         public const double TICKRATE = 128;
         static public int Tick { get; private set; } = 0;
-        
+        public Player _player { get; private set; }
+
         private bool IsGameOver = false;
         private DispatcherTimer gameTimer = new DispatcherTimer();
-        private DispatcherTimer renderTimer = new DispatcherTimer();
-        private Player _player;
-        public Game(Player player)
-        {
-            _player = player;
-            Start();
-        }
-        private void Start()
-        {
+        private DispatcherTimer frameTimer = new DispatcherTimer();
+        public void Start()
+        {   
+            //create map
             ObstacleControler.CreateMap();
             _player.SetPosition(75, 300);
             //create game ticrate timer   
@@ -34,20 +31,29 @@ namespace FlyingKitty
             gameTimer.Tick += new EventHandler(Update);
             gameTimer.Start();
             //create render FPS timer
-            renderTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
-            renderTimer.Tick += new EventHandler(Render);
-            renderTimer.Start();
-            //create map
-            
+            frameTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
+            frameTimer.Tick += new EventHandler(Render);
+            frameTimer.Start();
+        }
+        public void CreatePlayer(double mass, int timeJump, int width, int heigth, string pathImage)
+        {
+            Uri uriImage = new Uri(pathImage, UriKind.Relative);
+            _player = new Player(mass * G /TICKRATE, timeJump, width, heigth, new BitmapImage(uriImage));
+        }
+        public void PressKey()
+        {
+            if (_player.DirectionY == -1)
+                _player.IsPushDown = true;
         }
         private void Update(object sender, EventArgs e)
         {
+            //update objects
             _player.Update();
             ObstacleControler.Update();
-
+            //check player is alive 
             if (_player.IsAlive == false)
                 EndGame(_player.DeathСode);
-
+            //
             Tick++;
         }
         private void Render(object sender, EventArgs e)
@@ -57,7 +63,8 @@ namespace FlyingKitty
         }
         private void EndGame(byte deathCode)
         {
-            _player.SetPosition(100, 100);
+            gameTimer.Stop();
+            frameTimer.Stop();
         }
     }
 }

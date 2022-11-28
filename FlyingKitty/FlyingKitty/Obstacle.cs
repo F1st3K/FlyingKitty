@@ -27,10 +27,5 @@ namespace FlyingKitty
             _image.Height = Height;
             Children.Add(_image);
         }
-        public override void Update()
-        {
-            Move();
-            UpdateHitbox();
-        }
     }
 }
