@@ -24,7 +24,7 @@ namespace FlyingKitty
             ObstacleControler.GameSpeed = 100 / Game.TICKRATE;
             ObstacleControler.SetGround(3, (int)Width, 50, "../../images/graund.jpg");
             ObstacleControler.SetSky((int)Width, 10, "../../images/sky.jpg");
-            ObstacleControler.SetMap(2, 75, (int)Height, "../../images/obstacle.png");
+            ObstacleControler.SetMap(10, 75, (int)Height, "../../images/obstacle.png");
             //add obstacle on MainCanvas
             for (int i = 0; i < ObstacleControler.Ground.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Ground[i]);
@@ -35,7 +35,11 @@ namespace FlyingKitty
             game.CreatePlayer(70, 200, 50, 105, 50, 44, "../../images/kitty.png", "../../images/boll.png");
             MainCanvas.Children.Add(game._player);
             //load map
-            game.SetMap("");
+            ObstacleControler.WidthObjects = 75;
+            ObstacleControler.GapObjects = 10;
+            ObstacleControler.HeigthWin = 200;
+            ObstacleControler.ApetureWin = 50;
+            game.SetMap("___1_2_3_4_5__");
         }
         private void RestartGame()
         {

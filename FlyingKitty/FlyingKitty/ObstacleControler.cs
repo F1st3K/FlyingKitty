@@ -7,6 +7,10 @@ namespace FlyingKitty
     static class ObstacleControler
     {
         static public double GameSpeed;
+        static public int WidthObjects;
+        static public int GapObjects;
+        static public int HeigthWin;
+        static public int ApetureWin;
 
         static public Obstacle[] Map { get; private set; }
         static public Obstacle[] Ground { get; private set; }
@@ -37,11 +41,25 @@ namespace FlyingKitty
         {
             Sky.SetPosition(0, -50);
             Sky.RenderPosition();
-            Map[0].SetPosition(300, 400);
-            Map[1].SetPosition(300, -500);
             Ground[0].SetPosition(0, 650);
             Ground[1].SetPosition(500, 650);
             Ground[2].SetPosition(1000, 650);
+            for (int i = 0, j = 0, k = Map.Length-1; i < map.Length; i++)
+            {
+                switch (map[i])
+                {
+                    case '1': PutWall(i, j, k, ApetureWin * 1); break;
+                    case '2': PutWall(i, j, k, ApetureWin*3); break;
+                    case '3': PutWall(i, j, k, ApetureWin*5); break;
+                    case '4': PutWall(i, j, k, ApetureWin*7); break;
+                    case '5': PutWall(i, j, k, ApetureWin*9); break;
+                    default:
+                        continue;
+                }
+                j++;
+                k--;
+
+            }
         }
         static public bool IsColision(Rect hitbox)
         {
@@ -84,6 +102,11 @@ namespace FlyingKitty
                     Ground[i].SetPosition(Ground[indLastGround].Hitbox.Right, Ground[i].Hitbox.Y);
                     indLastGround = i;
                 }
+        }
+        static private void PutWall(int i, int up, int down, int startWin)
+        {
+            Map[up].SetPosition((GapObjects + WidthObjects) * i, - Map[up].Height + startWin);
+            Map[down].SetPosition((GapObjects + WidthObjects) * i, HeigthWin + startWin);
         }
     }
 }
