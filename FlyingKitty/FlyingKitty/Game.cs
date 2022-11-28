@@ -12,14 +12,19 @@ namespace FlyingKitty
 
         private DispatcherTimer gameTimer = new DispatcherTimer();
         private DispatcherTimer frameTimer = new DispatcherTimer();
+        private string _map;
 
-        static public int Tick { get; private set; } = 0;
+        public int Tick { get; private set; }
         public Player _player { get; private set; }
 
+        public void SetMap(string map)
+        {
+            _map = map;
+        }
         public void Start()
         {   
             //create map
-            ObstacleControler.CreateMap();
+            ObstacleControler.CreateMap(_map);
             _player.SetPosition(75, 300);
             //create game ticrate timer   
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
@@ -30,10 +35,11 @@ namespace FlyingKitty
             frameTimer.Tick += new EventHandler(Render);
             frameTimer.Start();
         }
-        public void CreatePlayer(double mass, int timeJump, int width, int heigth, string pathImage)
+        public void CreatePlayer(double mass, int timeJump, int width, int heigth, int widthSkin, int heightSkin, string pathPlayer, string pathSkin)
         {
-            Uri uriImage = new Uri(pathImage, UriKind.Relative);
-            _player = new Player(mass * G /TICKRATE, timeJump, width, heigth, new BitmapImage(uriImage));
+            Uri uriPlayer = new Uri(pathPlayer, UriKind.Relative);
+            Uri uriSkin = new Uri(pathSkin, UriKind.Relative);
+            _player = new Player(mass * G /TICKRATE, timeJump, width, heigth, widthSkin, heightSkin, new BitmapImage(uriPlayer), new BitmapImage(uriSkin));
         }
         public void PressKey()
         {

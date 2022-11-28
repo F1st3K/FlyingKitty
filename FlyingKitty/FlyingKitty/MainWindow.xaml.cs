@@ -15,7 +15,7 @@ namespace FlyingKitty
             InitializeComponent();
             game = new Game();
             LoadModel();
-            game.Start();
+            //game.Start();
         }
 
         private void LoadModel()
@@ -25,17 +25,17 @@ namespace FlyingKitty
             ObstacleControler.SetGround(3, (int)Width, 50, "../../images/graund.jpg");
             ObstacleControler.SetSky((int)Width, 10, "../../images/sky.jpg");
             ObstacleControler.SetMap(2, 75, (int)Height, "../../images/obstacle.png");
-
-            //load model player
-            game.CreatePlayer(70, 200, 75, 75, "../../images/player.png");
-            MainCanvas.Children.Add(game._player);
-
             //add obstacle on MainCanvas
             for (int i = 0; i < ObstacleControler.Ground.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Ground[i]);
             MainCanvas.Children.Add(ObstacleControler.Sky);
             for (int i = 0; i < ObstacleControler.Map.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Map[i]);
+            //load model player
+            game.CreatePlayer(70, 200, 50, 105, 50, 44, "../../images/kitty.png", "../../images/boll.png");
+            MainCanvas.Children.Add(game._player);
+            //load map
+            game.SetMap("");
         }
         private void RestartGame()
         {

@@ -33,7 +33,7 @@ namespace FlyingKitty
             for (int i = 0; i < count; i++)
                 Map[i] = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
-        static public void CreateMap()
+        static public void CreateMap(string map)
         {
             Sky.SetPosition(0, -50);
             Sky.RenderPosition();

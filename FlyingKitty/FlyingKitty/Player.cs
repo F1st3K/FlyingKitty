@@ -8,7 +8,8 @@ namespace FlyingKitty
 {
     internal class Player : Sprite
     {
-        private Image _image;
+        private Image _imagePlayer;
+        private Image _imageSkin;
         private DispatcherTimer PushDownTimer;
         private double _pushDownMSTime;
 
@@ -16,7 +17,7 @@ namespace FlyingKitty
         public byte DeathСode { get; private set; }
         public bool IsPushDown { private get; set; }
 
-        public Player(double speedY, double timeJump, int width, int height, ImageSource sourse)
+        public Player(double speedY, double timeJump, int width, int height, int widthSkin, int heightSkin, ImageSource soursePlayer, ImageSource sourseSkin)
         {
             //constructor
             Width = width;
@@ -29,11 +30,17 @@ namespace FlyingKitty
             IsPushDown = false;
             IsAlive = true;
             //load image
-            _image = new Image();
-            _image.Source = sourse;
-            _image.Width = Width;
-            _image.Height = Height;
-            Children.Add(_image);
+            _imagePlayer = new Image();
+            _imagePlayer.Source = soursePlayer;
+            _imagePlayer.Width = Width;
+            _imagePlayer.Height = Height;
+            Children.Add(_imagePlayer);
+            _imageSkin = new Image();
+            _imageSkin.Source = sourseSkin;
+            _imageSkin.Width = Width;
+            _imageSkin.Height = Height;
+            SetTop(_imageSkin, -height);
+            Children.Add(_imageSkin);
             //change time push down 
             PushDownTimer.Interval = TimeSpan.FromMilliseconds(_pushDownMSTime);
             PushDownTimer.Tick += (sender, ards) => { IsPushDown = false; };
