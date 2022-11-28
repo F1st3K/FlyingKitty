@@ -39,7 +39,7 @@ namespace FlyingKitty
 
             //load model player
             Uri uriImage = new Uri("../../images/player.png", UriKind.Relative);
-            player = new Player(90*Game.G/Game.TICKRATE, 360, 75, 75, new BitmapImage(uriImage));
+            player = new Player(70*Game.G/Game.TICKRATE, 200, 75, 75, new BitmapImage(uriImage));
             MainCanvas.Children.Add(player);
             player.SetPosition(200, 400);
             player.RenderPosition();
