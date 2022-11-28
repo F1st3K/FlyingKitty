@@ -65,10 +65,10 @@ namespace FlyingKitty
         }
         private protected override void UpdateHitbox()
         {
-            double percentOf = 70.6667 / 100;
+            double percentOf = 70.01 / 100;
             Hitbox = new Rect(
-                _posX+Width*(1-percentOf),
-                _posY+Height*(1 - percentOf),
+                _posX+Width*(1-percentOf)/2,
+                _posY+Height*(1 - percentOf)/2,
                 Width*percentOf,
                 Height*percentOf);
         }
