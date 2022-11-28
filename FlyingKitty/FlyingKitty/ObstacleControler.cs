@@ -10,6 +10,7 @@ namespace FlyingKitty
 
         static public Obstacle[] Map { get; private set; }
         static public Obstacle[] Ground { get; private set; }
+        static public int indLastGround { get; private set; }
         static public Obstacle Sky    { get; private set; }
 
         static public void SetGround(int count, int width, int height, string pathImage)
@@ -18,6 +19,7 @@ namespace FlyingKitty
             Ground = new Obstacle[count];
             for (int i = 0; i < count; i++)
                 Ground[i] = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
+            indLastGround = count - 1;
         }
         static public void SetSky(int width, int height, string pathImage)
         {
@@ -64,6 +66,7 @@ namespace FlyingKitty
             for (int i = 0; i < Ground.Length; i++)
                 Ground[i].Update();
             Sky.Update();
+            GroundShiftCheck();
         }
         static public void Render()
         {
@@ -71,6 +74,16 @@ namespace FlyingKitty
                 Map[i].RenderPosition();
             for (int i = 0; i < Ground.Length; i++)
                 Ground[i].RenderPosition();
+        }
+
+        static private void GroundShiftCheck()
+        {
+            for (int i = 0; i < Ground.Length; i++)
+                if (Ground[i].Hitbox.Right < 0)
+                {
+                    Ground[i].SetPosition(Ground[indLastGround].Hitbox.Right, Ground[i].Hitbox.Y);
+                    indLastGround = i;
+                }
         }
     }
 }
