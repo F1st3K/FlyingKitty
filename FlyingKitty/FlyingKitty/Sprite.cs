@@ -23,6 +23,7 @@ namespace FlyingKitty
         {
             Fly();
             Move();
+            UpdateHitbox();
         }
         public void SetPosition(double x, double y)
         {
@@ -34,7 +35,10 @@ namespace FlyingKitty
             Canvas.SetLeft(this, _posX);
             Canvas.SetTop(this, _posY);
         }
-
+        private protected virtual void UpdateHitbox()
+        {
+            Hitbox = new Rect(_posX, _posY, Width, Height);
+        }
         private protected void Fly()
         {
             _posY += _speedY * DirectionY;

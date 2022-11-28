@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,30 +31,25 @@ namespace FlyingKitty
         {
             InitializeComponent();
 
+            //Create obstacle
+            ObstacleControler.GameSpeed = 100 / Game.TICKRATE;
+            ObstacleControler.SetGround(3, (int)Width, 50, "../../images/graund.jpg");
+            ObstacleControler.SetSky((int)Width, 10, "../../images/sky.jpg");
+            ObstacleControler.SetMap(2, 75, (int)Height, "../../images/obstacle.png");
+
             //load model player
             Uri uriImage = new Uri("../../images/player.png", UriKind.Relative);
             player = new Player(90*Game.G/Game.TICKRATE, 360, 75, 75, new BitmapImage(uriImage));
             MainCanvas.Children.Add(player);
-            player.SetPosition(75, 400);
+            player.SetPosition(200, 400);
             player.RenderPosition();
 
-            //Create obstacle
-            ObstacleControler.GameSpeed = 100 / Game.TICKRATE;
-            ObstacleControler.SetGround((int)Width, 50, "../../images/graund.jpg");
-            ObstacleControler.SetSky((int)Width, 10, "../../images/sky.jpg");
-            ObstacleControler.SetMap(50, 75, (int)Height, "../../images/obstacle.png");
-
             //add obstacle on MainCanvas
-            MainCanvas.Children.Add(ObstacleControler.Ground);
-            Canvas.SetTop(ObstacleControler.Ground, Height-75);
+            for (int i = 0; i < ObstacleControler.Ground.Length; i++)
+                MainCanvas.Children.Add(ObstacleControler.Ground[i]);
             MainCanvas.Children.Add(ObstacleControler.Sky);
-            Canvas.SetTop(ObstacleControler.Sky, -50);
             for (int i = 0; i < ObstacleControler.Map.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Map[i]);
-
-            //start game
-            game = new Game(player);
-            game.Start();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -61,13 +57,15 @@ namespace FlyingKitty
         }
         private new void KeyDownEvent(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter ||
-                e.Key == Key.Space ||
+            if (e.Key == Key.Space ||
                 e.Key == Key.Down)
             {
                 if (player.DirectionY == -1)
                     player.IsPushDown = true;
             }
+            //start game
+            if (e.Key == Key.Enter)
+                game = new Game(player);
         }
     }
 }

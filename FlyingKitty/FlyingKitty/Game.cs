@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace FlyingKitty
@@ -22,9 +23,12 @@ namespace FlyingKitty
         public Game(Player player)
         {
             _player = player;
+            Start();
         }
-        public void Start()
+        private void Start()
         {
+            ObstacleControler.CreateMap();
+            _player.SetPosition(75, 300);
             //create game ticrate timer   
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             gameTimer.Tick += new EventHandler(Update);
@@ -34,12 +38,16 @@ namespace FlyingKitty
             renderTimer.Tick += new EventHandler(Render);
             renderTimer.Start();
             //create map
-            ObstacleControler.CreateMap();
+            
         }
         private void Update(object sender, EventArgs e)
         {
             _player.Update();
             ObstacleControler.Update();
+
+            if (_player.IsAlive == false)
+                EndGame(_player.DeathСode);
+
             Tick++;
         }
         private void Render(object sender, EventArgs e)
@@ -47,9 +55,9 @@ namespace FlyingKitty
             _player.RenderPosition();
             ObstacleControler.Render();
         }
-        private void End()
+        private void EndGame(byte deathCode)
         {
-
+            _player.SetPosition(100, 100);
         }
     }
 }
