@@ -3,8 +3,6 @@ using System.Windows.Media;
 using System.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.IO;
-using FlyingKitty.Properties;
 
 namespace FlyingKitty
 {
@@ -83,10 +81,15 @@ namespace FlyingKitty
         }
         private void EndGame(byte deathCode)
         {
-            loseGameSound.Play();
+            if (deathCode != 0)
+            {
+                gameSound.Stop();
+                loseGameSound.Play();
+            }
+            if (deathCode == 0)
+                gameSound.Volume = 1;
             gameTimer.Stop();
             frameTimer.Stop();
-            gameSound.Stop();
         }
     }
 }

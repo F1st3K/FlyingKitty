@@ -116,6 +116,7 @@
     <Resource Include="media\kitty.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="media\finish.jpg" />
     <Content Include="media\GameSound.wav" />
     <Content Include="media\loseGameSound.wav" />
     <Content Include="media\pressDownSound.wav" />

@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Media;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
 namespace FlyingKitty
@@ -18,22 +14,21 @@ namespace FlyingKitty
         {
             InitializeComponent();
             game = new Game();
-            LoadModel();
-            game.LoadSound();
-            //game.Start();
         }
 
         private void LoadModel()
         {
             //Create obstacle
-            ObstacleControler.GameSpeed = 300 / Game.TICKRATE;
+            ObstacleControler.GameSpeed = 500 / Game.TICKRATE;
             ObstacleControler.SetGround(3, (int)Width, 50, "../../media/graund.jpg");
             ObstacleControler.SetSky((int)Width, 10, "../../media/sky.jpg");
-            ObstacleControler.SetMap(10, 75, (int)Height, "../../media/obstacle.png");
+            ObstacleControler.SetFinish(350, (int)Height, "../../media/finish.jpg");
+            ObstacleControler.SetMap(4, 75, (int)Height, "../../media/obstacle.png");
             //add obstacle on MainCanvas
             for (int i = 0; i < ObstacleControler.Ground.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Ground[i]);
             MainCanvas.Children.Add(ObstacleControler.Sky);
+            MainCanvas.Children.Add(ObstacleControler.Finish);
             for (int i = 0; i < ObstacleControler.Map.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Map[i]);
             //load model player
@@ -44,11 +39,12 @@ namespace FlyingKitty
             ObstacleControler.GapObjects = 10;
             ObstacleControler.HeigthWin = 200;
             ObstacleControler.ApetureWin = 50;
-            game.SetMap("___1_2_3_4_5__");
+            game.SetMap("__2___3_");
         }
         private void RestartGame()
         {
             MainCanvas.Children.Clear();
+            game.LoadSound();
             game = new Game();
             LoadModel();
             game.LoadSound();

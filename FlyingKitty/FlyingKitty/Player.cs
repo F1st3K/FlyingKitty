@@ -93,6 +93,12 @@ namespace FlyingKitty
                 DeathСode = 2;
                 return;
             }
+            if (ObstacleControler.IsFinaly(Hitbox))
+            {
+                IsAlive = false;
+                DeathСode = 0;
+                return;
+            }
         }
     }
 }

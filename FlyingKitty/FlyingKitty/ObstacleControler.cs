@@ -16,6 +16,7 @@ namespace FlyingKitty
         static public Obstacle[] Ground { get; private set; }
         static public int indLastGround { get; private set; }
         static public Obstacle Sky    { get; private set; }
+        static public Obstacle Finish { get; private set; }
 
         static public void SetGround(int count, int width, int height, string pathImage)
         {
@@ -29,6 +30,11 @@ namespace FlyingKitty
         {
             Uri uri = new Uri(pathImage, UriKind.Relative);
             Sky = new Obstacle(0, 0, width, height, new BitmapImage(uri));
+        }
+        static public void SetFinish(int width, int height, string pathImage)
+        {
+            Uri uri = new Uri(pathImage, UriKind.Relative);
+            Finish = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
         static public void SetMap(int count, int width, int height, string pathImage)
         {
@@ -58,8 +64,8 @@ namespace FlyingKitty
                 }
                 j++;
                 k--;
-
             }
+            Finish.SetPosition(map.Length*(GapObjects + WidthObjects), 0);
         }
         static public bool IsColision(Rect hitbox)
         {
@@ -77,6 +83,12 @@ namespace FlyingKitty
                 return true;
             return false;
         }
+        static public bool IsFinaly(Rect hitbox)
+        {
+            if (hitbox.IntersectsWith(Finish.Hitbox))
+                return true;
+            return false;
+        }
         static public void Update()
         {
             for (int i = 0; i < Map.Length; i++)
@@ -84,6 +96,7 @@ namespace FlyingKitty
             for (int i = 0; i < Ground.Length; i++)
                 Ground[i].Update();
             Sky.Update();
+            Finish.Update();
             GroundShiftCheck();
         }
         static public void Render()
@@ -92,6 +105,7 @@ namespace FlyingKitty
                 Map[i].RenderPosition();
             for (int i = 0; i < Ground.Length; i++)
                 Ground[i].RenderPosition();
+            Finish.RenderPosition();
         }
 
         static private void GroundShiftCheck()
