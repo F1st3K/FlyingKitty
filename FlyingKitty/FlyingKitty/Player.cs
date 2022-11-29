@@ -17,7 +17,14 @@ namespace FlyingKitty
         public byte DeathСode { get; private set; }
         public bool IsPushDown { private get; set; }
 
-        public Player(double speedY, double timeJump, int width, int height, int widthSkin, int heightSkin, ImageSource soursePlayer, ImageSource sourseSkin)
+        public Player(double speedY,
+                      double timeJump,
+                      int width,
+                      int height,
+                      int widthSkin,
+                      int heightSkin,
+                      ImageSource soursePlayer,
+                      ImageSource sourseSkin)
         {
             //constructor
             Width = width;
@@ -37,8 +44,8 @@ namespace FlyingKitty
             Children.Add(_imagePlayer);
             _imageSkin = new Image();
             _imageSkin.Source = sourseSkin;
-            _imageSkin.Width = Width;
-            _imageSkin.Height = Height;
+            _imageSkin.Width = widthSkin;
+            _imageSkin.Height = heightSkin;
             SetTop(_imageSkin, -height);
             Children.Add(_imageSkin);
             //change time push down 

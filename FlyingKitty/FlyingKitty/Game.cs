@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Windows.Media;
+using System.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.IO;
+using FlyingKitty.Properties;
 
 namespace FlyingKitty
 {
@@ -12,6 +16,9 @@ namespace FlyingKitty
 
         private DispatcherTimer gameTimer = new DispatcherTimer();
         private DispatcherTimer frameTimer = new DispatcherTimer();
+        private MediaPlayer gameSound = new MediaPlayer();
+        private SoundPlayer loseGameSound = new SoundPlayer();
+        private SoundPlayer pressDownSound = new SoundPlayer();
         private string _map;
 
         public int Tick { get; private set; }
@@ -41,10 +48,17 @@ namespace FlyingKitty
             Uri uriSkin = new Uri(pathSkin, UriKind.Relative);
             _player = new Player(mass * G /TICKRATE, timeJump, width, heigth, widthSkin, heightSkin, new BitmapImage(uriPlayer), new BitmapImage(uriSkin));
         }
-        public void PressKey()
+        public void LoadSound()
+        {
+            pressDownSound.Stream = Properties.Resources.pressDownSound;
+            //loseGameSound.Open(new Uri(sourceLoseGame, UriKind.Relative));
+            //gameSound.Open(new Uri(sourceGame, UriKind.Relative));
+        }
+        public void PressDown()
         {
             if (_player.DirectionY == -1)
                 _player.IsPushDown = true;
+            pressDownSound.Play();
         }
 
         private void Update(object sender, EventArgs e)

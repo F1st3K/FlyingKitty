@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -100,18 +101,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\player.png" />
+    <Resource Include="media\player.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\graund.jpg" />
-    <Resource Include="images\sky.jpg" />
+    <Resource Include="media\graund.jpg" />
+    <Resource Include="media\sky.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\obstacle.png" />
+    <Resource Include="media\obstacle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\boll.png" />
-    <Resource Include="images\kitty.png" />
+    <Resource Include="media\boll.png" />
+    <Resource Include="media\kitty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="media\GameSound.mp3" />
+    <Content Include="media\pressDownSound.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
