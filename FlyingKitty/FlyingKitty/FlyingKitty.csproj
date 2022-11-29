@@ -91,6 +91,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -115,7 +116,8 @@
     <Resource Include="media\kitty.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="media\GameSound.mp3" />
+    <Content Include="media\GameSound.wav" />
+    <Content Include="media\loseGameSound.wav" />
     <Content Include="media\pressDownSound.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

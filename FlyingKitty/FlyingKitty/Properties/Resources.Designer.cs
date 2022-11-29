@@ -61,72 +61,11 @@ namespace FlyingKitty.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
         /// </summary>
-        internal static System.Drawing.Bitmap boll {
+        internal static System.IO.UnmanagedMemoryStream loseGameSound {
             get {
-                object obj = ResourceManager.GetObject("boll", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
-        internal static byte[] GameSound {
-            get {
-                object obj = ResourceManager.GetObject("GameSound", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
-        internal static byte[] GameSound1 {
-            get {
-                object obj = ResourceManager.GetObject("GameSound1", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap graund {
-            get {
-                object obj = ResourceManager.GetObject("graund", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap kitty {
-            get {
-                object obj = ResourceManager.GetObject("kitty", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap obstacle {
-            get {
-                object obj = ResourceManager.GetObject("obstacle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap player {
-            get {
-                object obj = ResourceManager.GetObject("player", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetStream("loseGameSound", resourceCulture);
             }
         }
         
@@ -136,25 +75,6 @@ namespace FlyingKitty.Properties {
         internal static System.IO.UnmanagedMemoryStream pressDownSound {
             get {
                 return ResourceManager.GetStream("pressDownSound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream pressDownSound1 {
-            get {
-                return ResourceManager.GetStream("pressDownSound1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap sky {
-            get {
-                object obj = ResourceManager.GetObject("sky", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

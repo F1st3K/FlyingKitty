@@ -62,13 +62,5 @@ namespace FlyingKitty
             if (e.Key == Key.Enter)
                 RestartGame();
         }
-        private string GetExeDirectory()
-        {
-            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            UriBuilder uri = new UriBuilder(codeBase);
-            string path = Uri.UnescapeDataString(uri.Path);
-            path = Path.GetDirectoryName(path);
-            return path;
-        }
     }
 }

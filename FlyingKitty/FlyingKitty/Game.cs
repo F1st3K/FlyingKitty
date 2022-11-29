@@ -41,6 +41,8 @@ namespace FlyingKitty
             frameTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
             frameTimer.Tick += new EventHandler(Render);
             frameTimer.Start();
+            //
+            gameSound.Play();
         }
         public void CreatePlayer(double mass, int timeJump, int width, int heigth, int widthSkin, int heightSkin, string pathPlayer, string pathSkin)
         {
@@ -51,14 +53,16 @@ namespace FlyingKitty
         public void LoadSound()
         {
             pressDownSound.Stream = Properties.Resources.pressDownSound;
-            //loseGameSound.Open(new Uri(sourceLoseGame, UriKind.Relative));
-            //gameSound.Open(new Uri(sourceGame, UriKind.Relative));
+            loseGameSound.Stream = Properties.Resources.loseGameSound;
+            gameSound.Open(new Uri("../../media/GameSound.wav", UriKind.Relative));
         }
         public void PressDown()
         {
-            if (_player.DirectionY == -1)
+            if (_player.DirectionY == -1 && _player.IsAlive)
+            {
                 _player.IsPushDown = true;
-            pressDownSound.Play();
+                pressDownSound.Play();
+            }
         }
 
         private void Update(object sender, EventArgs e)
@@ -79,8 +83,10 @@ namespace FlyingKitty
         }
         private void EndGame(byte deathCode)
         {
+            loseGameSound.Play();
             gameTimer.Stop();
             frameTimer.Stop();
+            gameSound.Stop();
         }
     }
 }
