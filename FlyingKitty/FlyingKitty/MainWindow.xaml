@@ -12,6 +12,19 @@
         WindowStartupLocation="CenterScreen"
         Title="Flying Kitty"
         >
-    
-    
+    <Canvas Margin="0,0,0,1">
+        <Button Name="level1" Content="1lvl" Canvas.Left="10" Canvas.Top="99" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Name="level2" Content="2lvl" Canvas.Left="88" Canvas.Top="99" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Name="level3" Content="3lvl" Canvas.Left="164" Canvas.Top="99" Height="66" Width="64" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Name="level4" Content="4lvl" Canvas.Left="10" Canvas.Top="183" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Name="level5" Content="5lvl" Canvas.Left="88" Canvas.Top="183" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Выберете сложность игры, и уровень для прохождения" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top" Width="218" Height="37"/>
+        <ComboBox Name="Difficults" Canvas.Left="10" Canvas.Top="52" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBlock>easy</TextBlock>
+            <TextBlock>Average</TextBlock>
+            <TextBlock>HARD</TextBlock>
+        </ComboBox>
+
+    </Canvas>
+
 </Window>
