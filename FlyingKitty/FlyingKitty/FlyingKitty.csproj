@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Obstacle.cs" />
-    <Compile Include="ObstacleControler.cs" />
+    <Compile Include="SceneObjectController.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

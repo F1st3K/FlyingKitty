@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlyingKitty"
         mc:Ignorable="d"
-        Width="560" Height="720" 
-        MinWidth="560" MaxWidth="560"
-        MinHeight="720" MaxHeight="720"
+        Width="250" Height="300" 
+        MinWidth="250" MaxWidth="250"
+        MinHeight="300" MaxHeight="300"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         Title="Flying Kitty"
         >
-    <Grid>
-        <Button x:Name="start" Click="start_Click"></Button>
-    </Grid>
+    
+    
 </Window>

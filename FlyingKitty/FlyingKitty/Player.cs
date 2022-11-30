@@ -81,19 +81,19 @@ namespace FlyingKitty
         }
         private void Colision()
         {
-            if (ObstacleControler.IsColision(Hitbox))
+            if (SceneObjectController.IsColision(Hitbox))
             {
                 IsAlive = false;
                 DeathСode = 1;
                 return;
             }
-            if (ObstacleControler.IsFlewAway(Hitbox))
+            if (SceneObjectController.IsFlewAway(Hitbox))
             {
                 IsAlive = false;
                 DeathСode = 2;
                 return;
             }
-            if (ObstacleControler.IsFinaly(Hitbox))
+            if (SceneObjectController.IsFinaly(Hitbox))
             {
                 IsAlive = false;
                 DeathСode = 0;

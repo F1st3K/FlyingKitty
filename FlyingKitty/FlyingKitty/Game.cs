@@ -17,27 +17,14 @@ namespace FlyingKitty
         private MediaPlayer gameSound = new MediaPlayer();
         private SoundPlayer loseGameSound = new SoundPlayer();
         private SoundPlayer pressDownSound = new SoundPlayer();
-        private string _map;
 
         public int Tick { get; private set; }
         public Player _player { get; private set; }
 
-        public void LoadMap(string map)
-        {
-            _map = map;
-            int count = 0;
-            foreach (var ch in _map)
-            {
-                if (char.IsDigit(ch))
-                    count += 2;
-            }
-            ObstacleControler.CountTubs = count;
-            ObstacleControler.CountGround = 3;
-        }
         public void Start()
         {
             //create map
-            ObstacleControler.CreateMap(_map);
+            SceneObjectController.CreateMap();
             _player.SetPosition(75, 500);
             //create game ticrate timer   
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
@@ -80,7 +67,7 @@ namespace FlyingKitty
         {
             //update objects
             _player.Update();
-            ObstacleControler.Update();
+            SceneObjectController.Update();
             //check player is alive 
             if (_player.IsAlive == false)
                 EndGame(_player.DeathСode);
@@ -90,7 +77,7 @@ namespace FlyingKitty
         private void Render(object sender, EventArgs e)
         {
             _player.RenderPosition();
-            ObstacleControler.Render();
+            SceneObjectController.Render();
         }
         private void EndGame(byte deathCode)
         {

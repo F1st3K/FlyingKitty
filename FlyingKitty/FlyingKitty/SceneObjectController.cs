@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace FlyingKitty
 {
-    static class ObstacleControler
+    static class SceneObjectController
     {
         static public double GameSpeed;
         static public int WidthObjects;
@@ -13,6 +13,7 @@ namespace FlyingKitty
         static public int ApetureWin;
         static public int CountTubs;
         static public int CountGround;
+        static private string _map;
 
         static public Obstacle[] Map { get; private set; }
         static public Obstacle[] Ground { get; private set; }
@@ -45,16 +46,28 @@ namespace FlyingKitty
             for (int i = 0; i < Map.Length; i++)
                 Map[i] = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
-        static public void CreateMap(string map)
+        static public void LoadMap(string map)
+        {
+            _map = map;
+            int count = 0;
+            foreach (var ch in _map)
+            {
+                if (char.IsDigit(ch))
+                    count += 2;
+            }
+            CountTubs = count;
+            CountGround = 3;
+        }
+        static public void CreateMap()
         {
             Sky.SetPosition(0, -50);
             Sky.RenderPosition();
             Ground[0].SetPosition(0, 650);
             Ground[1].SetPosition(500, 650);
             Ground[2].SetPosition(1000, 650);
-            for (int i = 0, j = 0, k = Map.Length-1; i < map.Length; i++)
+            for (int i = 0, j = 0, k = Map.Length-1; i < _map.Length; i++)
             {
-                switch (map[i])
+                switch (_map[i])
                 {
                     case '1': PutWall(i, j, k, ApetureWin * 9); break;
                     case '2': PutWall(i, j, k, ApetureWin*8); break;
@@ -71,7 +84,7 @@ namespace FlyingKitty
                 j++;
                 k--;
             }
-            Finish.SetPosition(map.Length*(GapObjects + WidthObjects), 0);
+            Finish.SetPosition(_map.Length*(GapObjects + WidthObjects), 0);
         }
         static public bool IsColision(Rect hitbox)
         {
