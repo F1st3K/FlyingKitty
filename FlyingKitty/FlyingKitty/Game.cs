@@ -30,7 +30,7 @@ namespace FlyingKitty
         {   
             //create map
             ObstacleControler.CreateMap(_map);
-            _player.SetPosition(75, 300);
+            _player.SetPosition(75, 500);
             //create game ticrate timer   
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             gameTimer.Tick += new EventHandler(Update);
@@ -62,6 +62,13 @@ namespace FlyingKitty
                 pressDownSound.Play();
             }
         }
+        public void Stop()
+        {
+
+            gameSound.Stop();
+            gameTimer.Stop();
+            frameTimer.Stop();
+        }
 
         private void Update(object sender, EventArgs e)
         {
@@ -82,14 +89,10 @@ namespace FlyingKitty
         private void EndGame(byte deathCode)
         {
             if (deathCode != 0)
-            {
-                gameSound.Stop();
                 loseGameSound.Play();
-            }
             if (deathCode == 0)
                 gameSound.Volume = 1;
             gameTimer.Stop();
-            frameTimer.Stop();
         }
     }
 }

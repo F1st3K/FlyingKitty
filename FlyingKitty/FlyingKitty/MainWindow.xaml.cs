@@ -23,7 +23,7 @@ namespace FlyingKitty
             ObstacleControler.SetGround(3, (int)Width, 50, "../../media/graund.jpg");
             ObstacleControler.SetSky((int)Width, 10, "../../media/sky.jpg");
             ObstacleControler.SetFinish(350, (int)Height, "../../media/finish.jpg");
-            ObstacleControler.SetMap(4, 75, (int)Height, "../../media/obstacle.png");
+            ObstacleControler.SetMap(24, 75, (int)Height, "../../media/obstacle.png");
             //add obstacle on MainCanvas
             for (int i = 0; i < ObstacleControler.Ground.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Ground[i]);
@@ -39,12 +39,12 @@ namespace FlyingKitty
             ObstacleControler.GapObjects = 10;
             ObstacleControler.HeigthWin = 200;
             ObstacleControler.ApetureWin = 50;
-            game.SetMap("__2___3_");
+            game.SetMap("_______1_2_3_4_5_4_3_2_1___");
         }
         private void RestartGame()
         {
             MainCanvas.Children.Clear();
-            game.LoadSound();
+            game.Stop();
             game = new Game();
             LoadModel();
             game.LoadSound();
