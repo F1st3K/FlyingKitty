@@ -25,11 +25,13 @@ namespace FlyingKitty
         public void LoadMap(string map)
         {
             _map = map;
+            int count = 0;
             foreach (var ch in _map)
             {
                 if (char.IsDigit(ch))
-                    ObstacleControler.CountTubs += 2;
+                    count += 2;
             }
+            ObstacleControler.CountTubs = count;
             ObstacleControler.CountGround = 3;
         }
         public void Start()
@@ -74,7 +76,6 @@ namespace FlyingKitty
             gameTimer.Stop();
             frameTimer.Stop();
         }
-
         private void Update(object sender, EventArgs e)
         {
             //update objects
