@@ -22,12 +22,18 @@ namespace FlyingKitty
         public int Tick { get; private set; }
         public Player _player { get; private set; }
 
-        public void SetMap(string map)
+        public void LoadMap(string map)
         {
             _map = map;
+            foreach (var ch in _map)
+            {
+                if (char.IsDigit(ch))
+                    ObstacleControler.CountTubs += 2;
+            }
+            ObstacleControler.CountGround = 3;
         }
         public void Start()
-        {   
+        {
             //create map
             ObstacleControler.CreateMap(_map);
             _player.SetPosition(75, 500);
@@ -64,7 +70,6 @@ namespace FlyingKitty
         }
         public void Stop()
         {
-
             gameSound.Stop();
             gameTimer.Stop();
             frameTimer.Stop();

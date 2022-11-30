@@ -11,6 +11,8 @@ namespace FlyingKitty
         static public int GapObjects;
         static public int HeigthWin;
         static public int ApetureWin;
+        static public int CountTubs;
+        static public int CountGround;
 
         static public Obstacle[] Map { get; private set; }
         static public Obstacle[] Ground { get; private set; }
@@ -18,13 +20,13 @@ namespace FlyingKitty
         static public Obstacle Sky    { get; private set; }
         static public Obstacle Finish { get; private set; }
 
-        static public void SetGround(int count, int width, int height, string pathImage)
+        static public void SetGround(int width, int height, string pathImage)
         {
             Uri uri = new Uri(pathImage, UriKind.Relative);
-            Ground = new Obstacle[count];
-            for (int i = 0; i < count; i++)
+            Ground = new Obstacle[CountGround];
+            for (int i = 0; i < Ground.Length; i++)
                 Ground[i] = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
-            indLastGround = count - 1;
+            indLastGround = Ground.Length - 1;
         }
         static public void SetSky(int width, int height, string pathImage)
         {
@@ -36,11 +38,11 @@ namespace FlyingKitty
             Uri uri = new Uri(pathImage, UriKind.Relative);
             Finish = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
-        static public void SetMap(int count, int width, int height, string pathImage)
+        static public void SetMap( int width, int height, string pathImage)
         {
             Uri uri = new Uri(pathImage, UriKind.Relative);
-            Map = new Obstacle[count];
-            for (int i = 0; i < count; i++)
+            Map = new Obstacle[CountTubs];
+            for (int i = 0; i < Map.Length; i++)
                 Map[i] = new Obstacle(GameSpeed, 0, width, height, new BitmapImage(uri));
         }
         static public void CreateMap(string map)
@@ -54,11 +56,15 @@ namespace FlyingKitty
             {
                 switch (map[i])
                 {
-                    case '1': PutWall(i, j, k, ApetureWin * 1); break;
-                    case '2': PutWall(i, j, k, ApetureWin*3); break;
-                    case '3': PutWall(i, j, k, ApetureWin*5); break;
-                    case '4': PutWall(i, j, k, ApetureWin*7); break;
-                    case '5': PutWall(i, j, k, ApetureWin*9); break;
+                    case '1': PutWall(i, j, k, ApetureWin * 9); break;
+                    case '2': PutWall(i, j, k, ApetureWin*8); break;
+                    case '3': PutWall(i, j, k, ApetureWin*7); break;
+                    case '4': PutWall(i, j, k, ApetureWin*6); break;
+                    case '5': PutWall(i, j, k, ApetureWin*5); break;
+                    case '6': PutWall(i, j, k, ApetureWin * 4); break;
+                    case '7': PutWall(i, j, k, ApetureWin * 3); break;
+                    case '8': PutWall(i, j, k, ApetureWin * 2); break;
+                    case '9': PutWall(i, j, k, ApetureWin * 1); break;
                     default:
                         continue;
                 }

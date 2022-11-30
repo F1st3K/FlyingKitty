@@ -16,14 +16,20 @@ namespace FlyingKitty
             game = new Game();
         }
 
+        private void LoadLevel()
+        {
+            //load map settings
+            ObstacleControler.GameSpeed = 500 / Game.TICKRATE;
+            ObstacleControler.WidthObjects = 80;
+            ObstacleControler.GapObjects = 10;
+            ObstacleControler.HeigthWin = 200;
+            ObstacleControler.ApetureWin = 50;
+            game.LoadMap("_______12_34_56_78_98_7_6_5_4_3_2_1___");
+            CreateModel();
+            LoadModel();
+        }
         private void LoadModel()
         {
-            //Create obstacle
-            ObstacleControler.GameSpeed = 500 / Game.TICKRATE;
-            ObstacleControler.SetGround(3, (int)Width, 50, "../../media/graund.jpg");
-            ObstacleControler.SetSky((int)Width, 10, "../../media/sky.jpg");
-            ObstacleControler.SetFinish(350, (int)Height, "../../media/finish.jpg");
-            ObstacleControler.SetMap(24, 75, (int)Height, "../../media/obstacle.png");
             //add obstacle on MainCanvas
             for (int i = 0; i < ObstacleControler.Ground.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Ground[i]);
@@ -31,22 +37,24 @@ namespace FlyingKitty
             MainCanvas.Children.Add(ObstacleControler.Finish);
             for (int i = 0; i < ObstacleControler.Map.Length; i++)
                 MainCanvas.Children.Add(ObstacleControler.Map[i]);
+            MainCanvas.Children.Add(game._player);
+        }
+        private void CreateModel()
+        {
+            //Create obstacle
+            ObstacleControler.SetGround((int)Width, 50, "../../media/graund.jpg");
+            ObstacleControler.SetSky((int)Width, 10, "../../media/sky.jpg");
+            ObstacleControler.SetFinish(350, (int)Height, "../../media/finish.jpg");
+            ObstacleControler.SetMap(75, (int)Height, "../../media/obstacle.png");
             //load model player
             game.CreatePlayer(70, 200, 50, 105, 50, 44, "../../media/kitty.png", "../../media/boll.png");
-            MainCanvas.Children.Add(game._player);
-            //load map
-            ObstacleControler.WidthObjects = 75;
-            ObstacleControler.GapObjects = 10;
-            ObstacleControler.HeigthWin = 200;
-            ObstacleControler.ApetureWin = 50;
-            game.SetMap("_______1_2_3_4_5_4_3_2_1___");
         }
         private void RestartGame()
         {
             MainCanvas.Children.Clear();
             game.Stop();
             game = new Game();
-            LoadModel();
+            LoadLevel();
             game.LoadSound();
             game.Start();
         }
