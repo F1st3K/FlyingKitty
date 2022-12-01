@@ -47,11 +47,11 @@ namespace FlyingKitty
         public void LoadModel(GameWindow window)
         {
             window.MainCanvas.Children.Add(sky);
-            window.MainCanvas.Children.Add(finish);
             for (int i = 0; i < ground.Length; i++)
                 window.MainCanvas.Children.Add(ground[i]);
             for (int i = 0; i < tubes.Length; i++)
                 window.MainCanvas.Children.Add(tubes[i]);
+            window.MainCanvas.Children.Add(finish);
             window.MainCanvas.Children.Add(_player);
         }
         public void SetObjects()

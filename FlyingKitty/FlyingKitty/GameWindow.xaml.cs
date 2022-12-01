@@ -16,6 +16,18 @@ namespace FlyingKitty
         {
             
         }
+        private void Window_Closed(object sender, System.EventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 
