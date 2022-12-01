@@ -13,8 +13,9 @@ namespace FlyingKitty
         private DispatcherTimer PushDownTimer;
         private double _pushDownMSTime;
 
-        public bool IsAlive { get; private set; }
-        public byte DeathСode { get; private set; }
+        public bool GodeMode { get; private set; } = true;
+        public bool IsAlive { get; set; }
+        public byte DeathСode { get; set; }
         public bool IsPushDown { private get; set; }
 
         public Player(double speedY,

@@ -4,7 +4,6 @@ using System.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Windows.Input;
-using System.Windows;
 
 namespace FlyingKitty
 {
@@ -109,6 +108,7 @@ namespace FlyingKitty
             if (deathCode == 0)
                 gameSound.Volume = 1;
             gameTimer.Stop();
+            player.IsAlive = true;
         }
     }
 }

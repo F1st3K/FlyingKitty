@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.CodeDom;
 using System.Windows.Media.Imaging;
-using System.Windows;
 
 namespace FlyingKitty
 {
@@ -13,6 +12,10 @@ namespace FlyingKitty
         private Obstacle[] ground;
         private GroundMover groundMover;
         private MapCreater mapCreater;
+        private CollisionChecker CheckerGround;
+        private CollisionChecker CheckerSky;
+        private CollisionChecker CheckerTubes;
+        private CollisionChecker CheckerFinish;
         private Player _player;
         private Level _level;
 
@@ -25,27 +28,30 @@ namespace FlyingKitty
         {
             sky = new Obstacle(0, 0, width, 10, new BitmapImage(TexturePack.SkyTexture));
 
-            finish = new Obstacle(_level.GameSpeed / Game.TICKRATE, 0, 400, heigth, new BitmapImage(TexturePack.FinishTexture));
+            finish = new Obstacle(_level.GameSpeed / Game.TICKRATE, 0, width, heigth, new BitmapImage(TexturePack.FinishTexture));
 
             ground = new Obstacle[3];
             for (int i = 0; i < ground.Length; i++)
                 ground[i] = new Obstacle(_level.GameSpeed / Game.TICKRATE, 0, heigth, 50, new BitmapImage(TexturePack.GroundTexture));
-            groundMover = new GroundMover(ground);
 
             tubes = new Obstacle[_level.CountTubes];
             for (int i = 0; i < tubes.Length; i++)
                 tubes[i] = new Obstacle(_level.GameSpeed / Game.TICKRATE, 0, _level.WidthTubes, _level.HeightTubes, new BitmapImage(TexturePack.TubeTexture));
+
+            groundMover = new GroundMover(ground);
+            CheckerGround = new CollisionChecker(ground);
+            CheckerSky = new CollisionChecker(sky);
+            CheckerTubes = new CollisionChecker(tubes);
+            CheckerFinish = new CollisionChecker(finish);
         }
         public void LoadModel(GameWindow window)
         {
-            //add obstacle
             window.MainCanvas.Children.Add(sky);
             window.MainCanvas.Children.Add(finish);
             for (int i = 0; i < ground.Length; i++)
                 window.MainCanvas.Children.Add(ground[i]);
             for (int i = 0; i < tubes.Length; i++)
                 window.MainCanvas.Children.Add(tubes[i]);
-            //add player
             window.MainCanvas.Children.Add(_player);
         }
         public void SetObjects()
@@ -61,7 +67,6 @@ namespace FlyingKitty
         }
         public void Update()
         {
-            //update objects
             _player.Update();
             sky.Update();
             for (int i = 0; i < ground.Length; i++)
@@ -69,6 +74,7 @@ namespace FlyingKitty
             for (int i = 0; i < tubes.Length; i++)
                 tubes[i].Update();
             finish.Update();
+            Collision();
             groundMover.CheckShift();
         }
         public void Render()
@@ -79,6 +85,29 @@ namespace FlyingKitty
             for (int i = 0; i < tubes.Length; i++)
                 tubes[i].RenderPosition();
             finish.RenderPosition();
+        }
+        private void Collision()
+        {
+            if (CheckerFinish.IsCollision(_player))
+            {
+                _player.IsAlive = false;
+                _player.DeathСode = 0;
+                return;
+            }
+            if (_player.GodeMode)
+                return;
+            if (CheckerSky.IsCollision(_player))
+            {
+                _player.IsAlive = false;
+                _player.DeathСode = 2;
+                return;
+            }
+            if (CheckerGround.IsCollision(_player) || CheckerTubes.IsCollision(_player))
+            {
+                _player.IsAlive = false;
+                _player.DeathСode = 1;
+                return;
+            }
         }
     }
 }
