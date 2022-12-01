@@ -20,34 +20,40 @@ namespace FlyingKitty
         private SoundPlayer loseGameSound = new SoundPlayer();
         private MediaPlayer gameSound = new MediaPlayer();
         private Scene scene;
+        private Player player;
         private GameWindow _window;
         private int tick;
 
         public Game(Level level)
         {
-            scene = new Scene(level);
+            player = new Player(level.MassPlayer * Game.G / Game.TICKRATE,
+                                level.PushTimePlayer,
+                                level.SizePlayer.Width,
+                                level.SizePlayer.Height,
+                                level.SizePlayer.Width,
+                                level.SizePlayer.Height,
+                                new BitmapImage(TexturePack.PlayerTexture),
+                                new BitmapImage(TexturePack.PlayerSkinTexture));
+            scene = new Scene(level, player);
             _window = new GameWindow();
             _window.KeyDown += PressDown;
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             frameTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
-            
         }
         
         
         public void Start()
         {
-            //create map
+            //set scene
             scene.CreateObjects((int)_window.Width, (int)_window.Height);
-
             scene.LoadModel(_window);
-
             scene.SetObjects();
-
+            //
             _window.Show();
-            //set game ticrate timer   
+            //set game timer   
             gameTimer.Tick += new EventHandler(Update);
             gameTimer.Start();
-            //set render FPS timer
+            //set render timer
             frameTimer.Tick += new EventHandler(Render);
             frameTimer.Start();
             //play sound
@@ -63,12 +69,12 @@ namespace FlyingKitty
         }
         private void PressDown(object sender, KeyEventArgs e)
         {
-            //if ((e.Key == Key.Space ||e.Key == Key.Down) && 
-            //   (player.DirectionY == -1 && player.IsAlive))
-            //{
-            //    player.IsPushDown = true;
-            //    pressDownSound.Play();
-            //}
+            if ((e.Key == Key.Space || e.Key == Key.Down) &&
+               (player.DirectionY == -1 && player.IsAlive))
+            {
+                player.IsPushDown = true;
+                pressDownSound.Play();
+            }
             if (e.Key == Key.Enter)
                 Restart();
         }
@@ -89,7 +95,9 @@ namespace FlyingKitty
         private void Update(object sender, EventArgs e)
         {
             scene.Update();
-            //
+            //check player is alive
+            if (player.IsAlive == false)
+                EndGame(player.DeathСode);
             tick++;
         }
         private void Render(object sender, EventArgs e)
