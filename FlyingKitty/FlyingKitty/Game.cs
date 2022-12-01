@@ -4,6 +4,7 @@ using System.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Windows.Input;
+using System.Windows;
 
 namespace FlyingKitty
 {
@@ -18,53 +19,42 @@ namespace FlyingKitty
         private SoundPlayer pressDownSound = new SoundPlayer();
         private SoundPlayer loseGameSound = new SoundPlayer();
         private MediaPlayer gameSound = new MediaPlayer();
+        private Scene scene;
         private GameWindow _window;
-        private Player _player;
-        private Level _level;
-        private int Tick;
+        private int tick;
 
         public Game(Level level)
         {
-            _level = level;
+            scene = new Scene(level);
             _window = new GameWindow();
             _window.KeyDown += PressDown;
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             frameTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
-            _player = new Player(_level.MassPlayer * G / TICKRATE,
-                                 _level.PushTimePlayer,
-                                 _level.SizePlayer.Width,
-                                 _level.SizePlayer.Height,
-                                 _level.SizePlayer.Width,
-                                 _level.SizePlayer.Height,
-                                 new BitmapImage(_window.PlayerTexture),
-                                 new BitmapImage(_window.PlayerSkinTexture));
+            
         }
+        
+        
         public void Start()
         {
             //create map
+            scene.CreateObjects((int)_window.Width, (int)_window.Height);
 
+            scene.LoadModel(_window);
 
-            
-            LoadModel();
-            LoadSound();
-            _player.SetPosition(_level.StartPlayerPosition.X, _level.StartPlayerPosition.Y);
+            scene.SetObjects();
+
             _window.Show();
-            //create game ticrate timer   
+            //set game ticrate timer   
             gameTimer.Tick += new EventHandler(Update);
             gameTimer.Start();
-            //create render FPS timer
+            //set render FPS timer
             frameTimer.Tick += new EventHandler(Render);
             frameTimer.Start();
             //play sound
+            LoadSound();
             gameSound.Play();
         }
-        public void LoadModel()
-        {
-            //add obstacle on MainCanvas
-
-            //add player
-            _window.MainCanvas.Children.Add(_player);
-        }
+        
         public void LoadSound()
         {
             pressDownSound.Stream = Properties.Resources.pressDownSound;
@@ -73,12 +63,12 @@ namespace FlyingKitty
         }
         private void PressDown(object sender, KeyEventArgs e)
         {
-            if ((e.Key == Key.Space ||e.Key == Key.Down) && 
-               (_player.DirectionY == -1 && _player.IsAlive))
-            {
-                _player.IsPushDown = true;
-                pressDownSound.Play();
-            }
+            //if ((e.Key == Key.Space ||e.Key == Key.Down) && 
+            //   (player.DirectionY == -1 && player.IsAlive))
+            //{
+            //    player.IsPushDown = true;
+            //    pressDownSound.Play();
+            //}
             if (e.Key == Key.Enter)
                 Restart();
         }
@@ -94,22 +84,17 @@ namespace FlyingKitty
             gameTimer.Stop();
             gameTimer.Tick -= new EventHandler(Update);
             frameTimer.Tick -= new EventHandler(Render);            
-            Tick = 0;
+            tick = 0;
         }
         private void Update(object sender, EventArgs e)
         {
-            //update objects
-            _player.Update();
-            
-            //check player is alive 
-            if (_player.IsAlive == false)
-                EndGame(_player.DeathСode);
+            scene.Update();
             //
-            Tick++;
+            tick++;
         }
         private void Render(object sender, EventArgs e)
         {
-            _player.RenderPosition();
+            scene.Render();
         }
         private void EndGame(byte deathCode)
         {

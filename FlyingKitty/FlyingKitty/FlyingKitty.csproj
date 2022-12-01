@@ -61,7 +61,9 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Level.cs" />
+    <Compile Include="Scene.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="TexturePack.cs" />
     <Page Include="GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -16,6 +16,7 @@ namespace FlyingKitty
         public int HeightTubes {get; set;}
         public int DistanceBetweenObjects {get; set;}
         public int HeightWindows {get; set;}
+        public int CountTubes { get; set; }
         public int DistanceBetweenWindows {get; set;}
         public double MassPlayer { get; set;}
         public int PushTimePlayer { get; set;}
@@ -34,6 +35,17 @@ namespace FlyingKitty
             PushTimePlayer = 200;
             SizePlayer = new Size(50, 105);
             StartPlayerPosition = new Point(75, 500);
+            CountTubes = CalculateTubes();
+        }
+        private int CalculateTubes()
+        {
+            int tubes = 0;
+            foreach (var ch in _hashMap)
+            {
+                if (char.IsDigit(ch))
+                    tubes+=2;
+            }
+            return tubes;
         }
     }
 }
