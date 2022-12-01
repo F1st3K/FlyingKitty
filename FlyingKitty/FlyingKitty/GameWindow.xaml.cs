@@ -32,36 +32,8 @@ namespace FlyingKitty
             InitializeComponent();
         }
 
-        public void LoadModel()
-        {
-            //add obstacle on MainCanvas
-            for (int i = 0; i < SceneObjectController.Ground.Length; i++)
-                MainCanvas.Children.Add(SceneObjectController.Ground[i]);
-            MainCanvas.Children.Add(SceneObjectController.Sky);
-            MainCanvas.Children.Add(SceneObjectController.Finish);
-            for (int i = 0; i < SceneObjectController.Map.Length; i++)
-                MainCanvas.Children.Add(SceneObjectController.Map[i]);
-            MainCanvas.Children.Add(game._player);
-        }
-        private void CreateModel()
-        {
-            //Create obstacle
-            SceneObjectController.SetGround((int)Width, 50, "../../media/graund.jpg");
-            SceneObjectController.SetSky((int)Width, 10, "../../media/sky.jpg");
-            SceneObjectController.SetFinish(350, (int)Height, "../../media/finish.jpg");
-            SceneObjectController.SetMap(75, (int)Height, "../../media/obstacle.png");
-            //load model player
-            game.CreatePlayer();
-        }
-        private void RestartGame()
-        {
-            MainCanvas.Children.Clear();
-            game.Stop();
-            CreateModel();
-            LoadModel();
-            game.LoadSound();
-            game.Start();
-        }
+        
+        
         private new void KeyDownEvent(object sender, KeyEventArgs e)
         {
             

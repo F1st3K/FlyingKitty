@@ -15,7 +15,7 @@ namespace FlyingKitty
             InitializeComponent();
         }
 
-        private void start_Click(object sender, RoutedEventArgs e)
+        private void level1_Click(object sender, RoutedEventArgs e)
         {
             Level level = new Level("_______12_34_56_78_98_7_6_5_4_3_2_1___");
             Game game = new Game(level);

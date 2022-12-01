@@ -24,7 +24,7 @@ namespace FlyingKitty
         public Level(string hashMap)
         {
             _hashMap = hashMap;
-            GameSpeed = 300 / Game.TICKRATE;
+            GameSpeed = 300;
             WidthTubes = 80;
             HeightTubes = 700;
             DistanceBetweenObjects = 10;

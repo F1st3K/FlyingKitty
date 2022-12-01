@@ -81,24 +81,7 @@ namespace FlyingKitty
         }
         private void Colision()
         {
-            if (SceneObjectController.IsColision(Hitbox))
-            {
-                IsAlive = false;
-                DeathСode = 1;
-                return;
-            }
-            if (SceneObjectController.IsFlewAway(Hitbox))
-            {
-                IsAlive = false;
-                DeathСode = 2;
-                return;
-            }
-            if (SceneObjectController.IsFinaly(Hitbox))
-            {
-                IsAlive = false;
-                DeathСode = 0;
-                return;
-            }
+            
         }
     }
 }

@@ -13,7 +13,7 @@
         Title="Flying Kitty"
         >
     <Canvas Margin="0,0,0,1">
-        <Button Name="level1" Content="1lvl" Canvas.Left="10" Canvas.Top="99" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Name="level1" Content="1lvl" Canvas.Left="10" Canvas.Top="99" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center" Click="level1_Click"/>
         <Button Name="level2" Content="2lvl" Canvas.Left="88" Canvas.Top="99" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Name="level3" Content="3lvl" Canvas.Left="164" Canvas.Top="99" Height="66" Width="64" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Name="level4" Content="4lvl" Canvas.Left="10" Canvas.Top="183" Height="66" Width="62" HorizontalAlignment="Left" VerticalAlignment="Center"/>
