@@ -3,6 +3,7 @@ using System.Windows.Media;
 using System.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace FlyingKitty
 {
@@ -17,15 +18,39 @@ namespace FlyingKitty
         private MediaPlayer gameSound = new MediaPlayer();
         private SoundPlayer loseGameSound = new SoundPlayer();
         private SoundPlayer pressDownSound = new SoundPlayer();
+        private Level _level;
+        private GameWindow _window;
 
         public int Tick { get; private set; }
         public Player _player { get; private set; }
 
+        public Game(Level level)
+        {
+            _level = level;
+            _window = new GameWindow();
+            _window.KeyDown += PressDown;
+            _player = new Player(_level.MassPlayer,
+                                 _level.PushTimePlayer,
+                                 _level.SizePlayer.Width,
+                                 _level.SizePlayer.Height,
+                                 _level.SizePlayer.Width,
+                                 _level.SizePlayer.Height,
+                                 new BitmapImage(_window.PlayerTexture),
+                                 new BitmapImage(_window.PlayerSkinTexture));
+            LoadSound();
+        }
+        public void CreatePlayer()
+        {
+            
+        }
         public void Start()
         {
+            _window.MainCanvas.Children.Clear();
+            _window.LoadModel();
             //create map
-            SceneObjectController.CreateMap();
-            _player.SetPosition(75, 500);
+            
+            
+            _window.Show();
             //create game ticrate timer   
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             gameTimer.Tick += new EventHandler(Update);
@@ -37,24 +62,24 @@ namespace FlyingKitty
             //
             gameSound.Play();
         }
-        public void CreatePlayer(double mass, int timeJump, int width, int heigth, int widthSkin, int heightSkin, string pathPlayer, string pathSkin)
-        {
-            Uri uriPlayer = new Uri(pathPlayer, UriKind.Relative);
-            Uri uriSkin = new Uri(pathSkin, UriKind.Relative);
-            _player = new Player(mass * G /TICKRATE, timeJump, width, heigth, widthSkin, heightSkin, new BitmapImage(uriPlayer), new BitmapImage(uriSkin));
-        }
         public void LoadSound()
         {
             pressDownSound.Stream = Properties.Resources.pressDownSound;
             loseGameSound.Stream = Properties.Resources.loseGameSound;
             gameSound.Open(new Uri("../../media/GameSound.wav", UriKind.Relative));
         }
-        public void PressDown()
+        public void PressDown(object sender, KeyEventArgs e)
         {
-            if (_player.DirectionY == -1 && _player.IsAlive)
+            if ((e.Key == Key.Space ||e.Key == Key.Down) && 
+               (_player.DirectionY == -1 && _player.IsAlive))
             {
                 _player.IsPushDown = true;
                 pressDownSound.Play();
+            }
+
+            if (e.Key == Key.Enter)
+            { 
+
             }
         }
         public void Stop()

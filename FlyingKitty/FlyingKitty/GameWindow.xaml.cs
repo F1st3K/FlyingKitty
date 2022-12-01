@@ -20,14 +20,19 @@ namespace FlyingKitty
     public partial class GameWindow : Window
     {
         private Game game;
+        public readonly Uri PlayerTexture = new Uri("../../media/kitty.png", UriKind.Relative);
+        public readonly Uri PlayerSkinTexture = new Uri("../../media/boll.png", UriKind.Relative);
+        public readonly Uri TubeTexture = new Uri("../../media/obstacle.png", UriKind.Relative);
+        public readonly Uri FinishTexture = new Uri("../../media/finish.jpg", UriKind.Relative);
+        public readonly Uri SkyTexture = new Uri("../../media/sky.jpg", UriKind.Relative);
+        public readonly Uri GroundTexture = new Uri("../../media/graund.jpg", UriKind.Relative);
 
         public GameWindow()
         {
             InitializeComponent();
-            game = new Game();
         }
 
-        private void LoadModel()
+        public void LoadModel()
         {
             //add obstacle on MainCanvas
             for (int i = 0; i < SceneObjectController.Ground.Length; i++)
@@ -46,13 +51,12 @@ namespace FlyingKitty
             SceneObjectController.SetFinish(350, (int)Height, "../../media/finish.jpg");
             SceneObjectController.SetMap(75, (int)Height, "../../media/obstacle.png");
             //load model player
-            game.CreatePlayer(70, 200, 50, 105, 50, 44, "../../media/kitty.png", "../../media/boll.png");
+            game.CreatePlayer();
         }
         private void RestartGame()
         {
             MainCanvas.Children.Clear();
             game.Stop();
-            game = new Game();
             CreateModel();
             LoadModel();
             game.LoadSound();
@@ -60,11 +64,7 @@ namespace FlyingKitty
         }
         private new void KeyDownEvent(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space ||
-                e.Key == Key.Down)
-                game.PressDown();
-            if (e.Key == Key.Enter)
-                RestartGame();
+            
         }
     }
 }
