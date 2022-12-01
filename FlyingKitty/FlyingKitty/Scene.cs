@@ -11,6 +11,7 @@ namespace FlyingKitty
         private Obstacle finish;
         private Obstacle[] tubes;
         private Obstacle[] ground;
+        private GroundMover groundMover;
         private Player _player;
         private Level _level;
 
@@ -28,6 +29,7 @@ namespace FlyingKitty
             ground = new Obstacle[3];
             for (int i = 0; i < ground.Length; i++)
                 ground[i] = new Obstacle(_level.GameSpeed / Game.TICKRATE, 0, heigth, 50, new BitmapImage(TexturePack.GroundTexture));
+            groundMover = new GroundMover(ground);
 
             tubes = new Obstacle[_level.CountTubes];
             for (int i = 0; i < tubes.Length; i++)
@@ -64,6 +66,7 @@ namespace FlyingKitty
             for (int i = 0; i < tubes.Length; i++)
                 tubes[i].Update();
             finish.Update();
+            groundMover.CheckShift();
         }
         public void Render()
         {

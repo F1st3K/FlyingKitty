@@ -60,6 +60,7 @@
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GroundMover.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Sprite.cs" />

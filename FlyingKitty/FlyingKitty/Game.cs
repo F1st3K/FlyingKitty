@@ -26,7 +26,7 @@ namespace FlyingKitty
 
         public Game(Level level)
         {
-            player = new Player(level.MassPlayer * Game.G / Game.TICKRATE,
+            player = new Player(level.MassPlayer * G / TICKRATE,
                                 level.PushTimePlayer,
                                 level.SizePlayer.Width,
                                 level.SizePlayer.Height,
@@ -40,8 +40,6 @@ namespace FlyingKitty
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             frameTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
         }
-        
-        
         public void Start()
         {
             //set scene
@@ -60,8 +58,8 @@ namespace FlyingKitty
             LoadSound();
             gameSound.Play();
         }
-        
-        public void LoadSound()
+
+        private void LoadSound()
         {
             pressDownSound.Stream = Properties.Resources.pressDownSound;
             loseGameSound.Stream = Properties.Resources.loseGameSound;
