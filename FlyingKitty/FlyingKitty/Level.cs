@@ -9,7 +9,7 @@ namespace FlyingKitty
 {
     internal class Level
     {
-        private string _hashMap;
+        public string HashMap { get; private set; }
 
         public double GameSpeed { get; set; }
         public int WidthTubes {get; set;}
@@ -24,7 +24,7 @@ namespace FlyingKitty
         public Point StartPlayerPosition { get; set;}
         public Level(string hashMap)
         {
-            _hashMap = hashMap;
+            this.HashMap = hashMap;
             GameSpeed = 300;
             WidthTubes = 80;
             HeightTubes = 700;
@@ -40,7 +40,7 @@ namespace FlyingKitty
         private int CalculateTubes()
         {
             int tubes = 0;
-            foreach (var ch in _hashMap)
+            foreach (var ch in HashMap)
             {
                 if (char.IsDigit(ch))
                     tubes+=2;

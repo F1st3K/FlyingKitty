@@ -12,6 +12,7 @@ namespace FlyingKitty
         private Obstacle[] tubes;
         private Obstacle[] ground;
         private GroundMover groundMover;
+        private MapCreater mapCreater;
         private Player _player;
         private Level _level;
 
@@ -54,6 +55,8 @@ namespace FlyingKitty
             ground[0].SetPosition(0, 650);
             ground[1].SetPosition(500, 650);
             ground[2].SetPosition(1000, 650);
+            mapCreater = new MapCreater(tubes, _level);
+            finish.SetPosition(_level.HashMap.Length * (_level.DistanceBetweenObjects + _level.WidthTubes), 0);
             _player.SetPosition(_level.StartPlayerPosition.X, _level.StartPlayerPosition.Y);
         }
         public void Update()

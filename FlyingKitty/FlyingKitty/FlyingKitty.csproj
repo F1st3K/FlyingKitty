@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="GroundMover.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="MapCreater.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="TexturePack.cs" />
