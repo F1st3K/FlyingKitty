@@ -13,7 +13,7 @@ namespace FlyingKitty
         private DispatcherTimer PushDownTimer;
         private double _pushDownMSTime;
 
-        public bool GodeMode { get; private set; } = true;
+        public bool GodeMode { get; private set; } = false;
         public bool IsAlive { get; set; }
         public byte DeathСode { get; set; }
         public bool IsPushDown { private get; set; }

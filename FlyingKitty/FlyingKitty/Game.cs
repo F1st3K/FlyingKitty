@@ -37,10 +37,10 @@ namespace FlyingKitty
             _window = new GameWindow();
             _window.KeyDown += PressDown;
             _window.Restart.Click += Restart_Click;
+            _window.Closed += _window_Closed;
             gameTimer.Interval = TimeSpan.FromSeconds(1 / TICKRATE);
             frameTimer.Interval = TimeSpan.FromSeconds(1 / FPS);
         }
-
         public void Start()
         {
             //set scene
@@ -76,6 +76,10 @@ namespace FlyingKitty
             }
             if (e.Key == Key.Enter)
                 Restart();
+        }
+        private void _window_Closed(object sender, EventArgs e)
+        {
+            Stop();
         }
         private void Restart_Click(object sender, System.Windows.RoutedEventArgs e)
         {

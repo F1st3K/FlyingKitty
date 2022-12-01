@@ -77,5 +77,14 @@ namespace FlyingKitty
                     break;
             }
         }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Level level = new Level(HashMap.Text);
+            level.GameSpeed = speed;
+            Game game = new Game(level);
+            this.Hide();
+            game.Start();
+        }
     }
 }
